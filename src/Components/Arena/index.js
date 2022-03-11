@@ -119,6 +119,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
       {/* ボスをレンダリングします */}
       {boss && (
         <div className="boss-container">
+          <h2>Boss</h2>
           <div className={`boss-content  ${attackState}`}>
             <h2>🔥 {boss.name} 🔥</h2>
             <div className="image-content">
@@ -129,25 +130,13 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
               </div>
             </div>
           </div>
-          <div className="attack-container">
-            <button className="cta-button" onClick={runAttackAction}>
-              {`💥 Attack ${boss.name}`}
-            </button>
-          </div>
-      {/* Attack ボタンの下にローディングマークを追加します*/}
-          {attackState === 'attacking' && (
-            <div className="loading-indicator">
-              <LoadingIndicator />
-              <p>Attacking ⚔️</p>
-            </div>
-          )}
         </div>
       )}
     {/* NFT キャラクター をレンダリングします*/}
       {characterNFT && (
         <div className="players-container">
           <div className="player-container">
-            <h2>Your Character</h2>
+            <h2>Your Monster</h2>
             <div className="player">
               <div className="image-content">
                 <h2>{characterNFT.name}</h2>
@@ -169,6 +158,21 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
             <h2>Active Players</h2>
             <div className="players-list">{renderActivePlayersList()}</div>
           </div> */}
+        </div>
+      )}
+      {boss && (
+        <div className="boss-container">
+          <div className="attack-container">
+            <button className="cta-button" onClick={runAttackAction}>
+              {`💥 Attack to ${boss.name}`}
+            </button>
+          </div>
+          {attackState === 'attacking' && (
+            <div className="loading-indicator">
+              <LoadingIndicator />
+              <p>Attacking ⚔️</p>
+            </div>
+          )}
         </div>
       )}
     </div>

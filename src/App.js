@@ -88,7 +88,7 @@ const App = () => {
     } else if (currentAccount && !characterNFT) {
       return <SelectCharacter setCharacterNFT={setCharacterNFT} />;
     // シナリオ3.
-    // ーザーはWEBアプリにログインしており、かつ NFT キャラクターを持っている場合、
+    // WEBアプリにログインしており、かつ NFT キャラクターを持っている場合、
     // Area でボスと戦います。
     } else if (currentAccount && characterNFT) {
       return <Arena characterNFT={characterNFT} setCharacterNFT={setCharacterNFT} />;
@@ -163,8 +163,8 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">⚡️ METAVERSE GAME ⚡️</p>
-          <p className="sub-text">プレイヤーと協力してボスを倒そう✨</p>
+          <p className="header gradient-text">⚡️ Blockchain Buttle Game ⚡️</p>
+          <p className="sub-text">Let's do lots of Mints and defeat the bosses!🔥</p>
           {/* renderContent メソッドを呼び出します。*/}
           {renderContent()}
         </div>
