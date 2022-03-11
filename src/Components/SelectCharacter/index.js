@@ -82,7 +82,7 @@ const SelectCharacter = ({ setCharacterNFT }) => {
             const characterNFT = await gameContract.checkIfUserHasNFT();
             console.log('CharacterNFT: ', characterNFT);
             setCharacterNFT(transformCharacterData(characterNFT));
-            alert('NFT キャラクーが Mint されました -- リンクはこちらです: https://rinkeby.rarible.com/token/${gameContract}:${tokenId.toNumber()}?tab=details')
+            alert(`NFT キャラクターが Mint されました -- リンクはこちらです: https://rinkeby.rarible.com/token/${gameContract}:${tokenId.toNumber()}?tab=details`)
         }
     };
     // gameContractの準備ができたら、NFT キャラクターを読み込みます。
