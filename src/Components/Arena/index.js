@@ -17,6 +17,9 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
   // 攻撃の状態を保存する変数を初期化します。
   const [attackState, setAttackState] = useState('');
 
+  // 回復する状態を保存する変数を初期化します。
+  const [restoreState, setRestoreState] = useState('');
+
   const [showToast, setShowToast] = useState(false);
 
 
@@ -56,6 +59,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
     try {
     // コントラクトが呼び出されたことを確認します。
       if (gameContract) {
+        setRestoreState('restoring');
         console.log('Using Kizugusuri...');
 
         const kizugusuriTxn = await gameContract.kizuGusuri();
@@ -63,6 +67,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
         // トランザクションがマイニングされるまで待ちます。
         await kizugusuriTxn.wait();
         console.log('kizugusuriTxn:', kizugusuriTxn);
+        setRestoreState('restored');
       }
     } catch (error) {
       console.error('Error using kizugusuri:', error);
@@ -181,23 +186,30 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
       )}
       {boss && (
         <div className="boss-container">
-          <div className="attack-container">
-            <button className="cta-button" onClick={runAttackAction}>
-              {`💥 Attack to ${boss.name}`}
-            </button>
-          </div>
-          <div className="kizugusuri-container">
-            <button className="cta-button" onClick={runKizugusuri}>
-              {`💊 Use Kizugusuri(+20)`}
-
-            </button>
-          </div>
           {attackState === 'attacking' && (
             <div className="loading-indicator">
               <LoadingIndicator />
               <p>Attacking ⚔️</p>
             </div>
           )}
+          <div className="attack-container">
+            <button className="cta-button" onClick={runAttackAction}>
+              {`💥 Attack to ${boss.name}`}
+            </button>
+          </div>
+          {restoreState === 'restoring' && (
+            <div className="loading-indicator">
+              <LoadingIndicator />
+              <p>Recovering 💊</p>
+            </div>
+          )}
+          <div className="kizugusuri-container">
+            <button className="cta-button" onClick={runKizugusuri}>
+              {`💊 Use Kizugusuri(+20)`}
+
+            </button>
+          </div>
+          
         </div>
       )}
     </div>
