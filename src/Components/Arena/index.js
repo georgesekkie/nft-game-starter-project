@@ -20,7 +20,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
   const [showToast, setShowToast] = useState(false);
 
 
-  // ボスを攻撃する関数を設定します。
+  // ボスへ攻撃する関数を設定します。
   const runAttackAction = async () => {
     try {
     // コントラクトが呼び出されたことを確認します。
@@ -50,6 +50,25 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
       setAttackState('');
     }
   };
+
+  // プレイヤーを回復させる関数を設定
+  const runKizugusuri = async () => {
+    try {
+    // コントラクトが呼び出されたことを確認します。
+      if (gameContract) {
+        console.log('Using Kizugusuri...');
+
+        const kizugusuriTxn = await gameContract.kizuGusuri();
+
+        // トランザクションがマイニングされるまで待ちます。
+        await kizugusuriTxn.wait();
+        console.log('kizugusuriTxn:', kizugusuriTxn);
+      }
+    } catch (error) {
+      console.error('Error using kizugusuri:', error);
+    }
+  };
+
   // ページがロードされると下記が実行されます。
   useEffect(() => {
     // コントラクトからボスのメタデータを取得し、bossを設定する非同期関数 fetchBoss を設定します。
@@ -167,6 +186,12 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
               {`💥 Attack to ${boss.name}`}
             </button>
           </div>
+          <div className="kizugusuri-container">
+            <button className="cta-button" onClick={runKizugusuri}>
+              {`💊 Use Kizugusuri(+20)`}
+            </button>
+          </div>
+          
           {attackState === 'attacking' && (
             <div className="loading-indicator">
               <LoadingIndicator />
