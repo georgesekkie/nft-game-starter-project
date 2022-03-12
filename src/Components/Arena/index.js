@@ -189,9 +189,9 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
           <div className="kizugusuri-container">
             <button className="cta-button" onClick={runKizugusuri}>
               {`💊 Use Kizugusuri(+20)`}
+
             </button>
           </div>
-          
           {attackState === 'attacking' && (
             <div className="loading-indicator">
               <LoadingIndicator />
